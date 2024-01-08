@@ -9,6 +9,7 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 
 // This import is used to display notifications back to the user
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-login-form',
@@ -21,27 +22,41 @@ export class UserLoginFormComponent implements OnInit {
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    public router: Router
   ) {}
 
   ngOnInit(): void {}
 
-  // This is the function responsible for sending the form inputs to the backend
-  registerUser(): void {
-    this.fetchApiData.userLogin(this.userData).subscribe(
-      (result) => {
-        // Logic for a successful user login goes here! (To be implemented)
-        this.dialogRef.close(); // This will close the modal on success!
+  /**
+   * This is the function responsible for sending the form inputs to the backend
+   */
+  loginUser(): void {
+    // Declare and check the userLoginObservable variable
+    const userLoginObservable = this.fetchApiData.userLogin(this.userData);
 
-        this.snackBar.open(result, 'OK', {
-          duration: 2000,
-        });
-      },
-      (result) => {
-        this.snackBar.open(result, 'OK', {
-          duration: 2000,
-        });
-      }
-    );
+    if (userLoginObservable) {
+      userLoginObservable.subscribe(
+        (result) => {
+          // Logic for a successful user login goes here! (To be implemented)
+          console.log(result);
+          localStorage.setItem('user', JSON.stringify(result.user));
+          localStorage.setItem('token', result.token);
+          this.dialogRef.close(); // This will close the modal on success!
+          console.log(result);
+          this.snackBar.open('Logged in', 'OK', {
+            duration: 2000,
+          });
+          // Successfully login done
+
+          this.router.navigate(['movies']);
+        },
+        (result) => {
+          this.snackBar.open('Login failed', 'OK', {
+            duration: 2000,
+          });
+        }
+      );
+    }
   }
 }
