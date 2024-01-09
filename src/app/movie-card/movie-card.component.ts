@@ -74,7 +74,7 @@ export class MovieCardComponent implements OnInit {
     this.fetchMovies.getOneDirector(directorName).subscribe(
       (directorDetails: any) => {
         console.log('Director Details:', directorDetails);
-        this.openDialog('director', { director: directorDetails });
+        this.openDialog('director', { movies: directorDetails });
       },
       (error) => {
         console.error('Error fetching director details:', error);
