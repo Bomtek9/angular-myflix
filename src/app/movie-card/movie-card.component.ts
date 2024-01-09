@@ -42,6 +42,28 @@ export class MovieCardComponent implements OnInit {
     this.fetchAndOpenDialog('description', movie);
   }
 
+  toggleFavoriteMovie(movie: any): void {
+    const isFavorite = this.fetchMovies.isFavoriteMovie(movie._id);
+
+    if (isFavorite) {
+      this.removeFavoriteMovie(movie);
+    } else {
+      this.addFavoriteMovie(movie);
+    }
+  }
+
+  addFavoriteMovie(movie: any): void {
+    this.fetchMovies.addFavoriteMovie(movie._id).subscribe(() => {
+      console.log('Movie added to favorites:', movie.Title);
+    });
+  }
+
+  removeFavoriteMovie(movie: any): void {
+    this.fetchMovies.deleteFavoriteMovie(movie._id).subscribe(() => {
+      console.log('Movie removed from favorites:', movie.Title);
+    });
+  }
+
   fetchAndOpenDialog(dialogType: string, data: any): void {
     switch (dialogType) {
       case 'genre':

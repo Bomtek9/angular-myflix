@@ -12,8 +12,16 @@
         Description
       </button>
       <span style="flex-grow: 1"></span>
-      <button mat-icon-button color="warn">
-        <mat-icon>favorite_border</mat-icon>
+      <button mat-icon-button color="warn" (click)="toggleFavoriteMovie(movie)">
+        <mat-icon
+          [color]="fetchMovies.isFavoriteMovie(movie._id) ? 'warn' : 'default'"
+        >
+          {{
+            fetchMovies.isFavoriteMovie(movie._id)
+              ? "favorite"
+              : "favorite_border"
+          }}
+        </mat-icon>
       </button>
     </mat-card-actions>
   </mat-card>
