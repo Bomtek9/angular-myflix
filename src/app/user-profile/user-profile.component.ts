@@ -37,11 +37,6 @@ export class UserProfileComponent implements OnInit {
         });
     }
   }
-  removeFavoriteMovie(movie: any): void {
-    this.fetchApiData.deleteFavoriteMovie(movie._id).subscribe(() => {
-      console.log('Movie removed from favorites:', movie.Title);
-      this.getFavoriteMovies();
-    });
-  }
+
+  // Add more functions as needed for editing user profile and managing favorite movies
 }
-// Add more functions as needed for editing user profile and managing favorite movies
