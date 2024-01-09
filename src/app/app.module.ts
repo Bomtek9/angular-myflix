@@ -29,8 +29,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
+  { path: 'profile', component: UserProfileComponent },
   { path: 'movies', component: MovieCardComponent },
-  { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
+  { path: '', redirectTo: 'welcome', pathMatch: 'full' }, // Change 'prefix' to 'full'
 ];
 
 @NgModule({
