@@ -1,4 +1,31 @@
-/* styles.scss */
-body {
-  background-color: #ad1e1e;
+/* welcome-page.component.scss */
+
+.main-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #496e9f; /*  Blue */
+
+  h1 {
+    color: #e0fbfc; /* Light Blue */
+    font-size: 2.5em;
+    margin-bottom: 20px;
+  }
+
+  button {
+    margin: 10px;
+    background-color: #ee6c4d; /* Coral */
+    color: #e0fbfc; /* Light Blue */
+    font-size: 1.2em;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #98c1d9; /* Sky Blue */
+    }
+  }
 }
