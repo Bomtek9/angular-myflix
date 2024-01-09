@@ -24,6 +24,9 @@ export class MovieCardComponent implements OnInit {
   getMovies(): void {
     this.fetchMovies.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
+      this.movies.forEach((movie) => {
+        movie.isFavorite = this.fetchMovies.isFavoriteMovie(movie._id);
+      });
       console.log(this.movies);
     });
   }
@@ -80,6 +83,34 @@ export class MovieCardComponent implements OnInit {
         console.error('Error fetching director details:', error);
       }
     );
+  }
+
+  toggleFavoriteMovie(movie: any): void {
+    const index = this.movies.findIndex((m) => m._id === movie._id);
+    if (index !== -1) {
+      const isFavorite = this.fetchMovies.isFavoriteMovie(movie._id);
+
+      if (isFavorite) {
+        this.removeFavoriteMovie(movie);
+      } else {
+        this.addFavoriteMovie(movie);
+      }
+
+      // Update the isFavorite status in the local movies array
+      this.movies[index].isFavorite = !isFavorite;
+    }
+  }
+
+  addFavoriteMovie(movie: any): void {
+    this.fetchMovies.addFavoriteMovie(movie._id).subscribe(() => {
+      console.log('Movie added to favorites:', movie.Title);
+    });
+  }
+
+  removeFavoriteMovie(movie: any): void {
+    this.fetchMovies.deleteFavoriteMovie(movie._id).subscribe(() => {
+      console.log('Movie removed from favorites:', movie.Title);
+    });
   }
 
   openDialog(dialogType: string, data: any): void {

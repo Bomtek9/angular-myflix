@@ -1,3 +1,4 @@
+<!-- src/app/movie-card.component.html -->
 <div style="display: flex; gap: 16px">
   <mat-card *ngFor="let movie of movies" style="width: 300px">
     <img [src]="movie.ImagePath" alt="{{ movie.Title }}" style="width: 100%" />
@@ -12,8 +13,10 @@
         Description
       </button>
       <span style="flex-grow: 1"></span>
-      <button mat-icon-button color="warn">
-        <mat-icon>favorite_border</mat-icon>
+      <button mat-icon-button color="warn" (click)="toggleFavoriteMovie(movie)">
+        <mat-icon [color]="movie.isFavorite ? 'warn' : 'default'">
+          {{ movie.isFavorite ? "favorite" : "favorite_border" }}
+        </mat-icon>
       </button>
     </mat-card-actions>
   </mat-card>
