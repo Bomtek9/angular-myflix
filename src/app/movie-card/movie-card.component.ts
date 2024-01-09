@@ -27,12 +27,15 @@ export class MovieCardComponent implements OnInit {
       console.log(this.movies);
     });
   }
+
   openGenreDialog(movie: any): void {
-    this.fetchAndOpenDialog('genre', movie);
+    const genreName = movie.Genre.Name; // Adjust the property name based on your API response
+    this.fetchAndOpenDialog('genre', genreName);
   }
 
   openDirectorDialog(movie: any): void {
-    this.fetchAndOpenDialog('director', movie);
+    const directorName = movie.Director.Name; // Adjust the property name based on your API response
+    this.fetchAndOpenDialog('director', directorName);
   }
 
   openDescriptionDialog(movie: any): void {
@@ -42,10 +45,10 @@ export class MovieCardComponent implements OnInit {
   fetchAndOpenDialog(dialogType: string, data: any): void {
     switch (dialogType) {
       case 'genre':
-        this.openDialog(dialogType, data);
+        this.fetchGenreDetails(data);
         break;
       case 'director':
-        this.openDialog(dialogType, data);
+        this.fetchDirectorDetails(data);
         break;
       case 'description':
         this.openDialog(dialogType, data);
@@ -53,6 +56,30 @@ export class MovieCardComponent implements OnInit {
       default:
         break;
     }
+  }
+
+  fetchGenreDetails(genreName: string): void {
+    this.fetchMovies.getOneGenre(genreName).subscribe(
+      (genreDetails: any) => {
+        console.log('Genre Details:', genreDetails);
+        this.openDialog('genre', { movies: genreDetails });
+      },
+      (error) => {
+        console.error('Error fetching genre details:', error);
+      }
+    );
+  }
+
+  fetchDirectorDetails(directorName: string): void {
+    this.fetchMovies.getOneDirector(directorName).subscribe(
+      (directorDetails: any) => {
+        console.log('Director Details:', directorDetails);
+        this.openDialog('director', { director: directorDetails });
+      },
+      (error) => {
+        console.error('Error fetching director details:', error);
+      }
+    );
   }
 
   openDialog(dialogType: string, data: any): void {
