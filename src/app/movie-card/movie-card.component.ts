@@ -27,14 +27,12 @@ export class MovieCardComponent implements OnInit {
       console.log(this.movies);
     });
   }
-
-  openGenreDialog(genreName: string): void {
-    this.fetchGenreDetails(genreName);
+  openGenreDialog(movie: any): void {
+    this.fetchAndOpenDialog('genre', movie);
   }
 
   openDirectorDialog(movie: any): void {
-    const director = movie.director.Name; // Adjust the property name based on your API response
-    this.fetchAndOpenDialog('director', director);
+    this.fetchAndOpenDialog('director', movie);
   }
 
   openDescriptionDialog(movie: any): void {
@@ -44,10 +42,10 @@ export class MovieCardComponent implements OnInit {
   fetchAndOpenDialog(dialogType: string, data: any): void {
     switch (dialogType) {
       case 'genre':
-        this.fetchGenreDetails(data);
+        this.openDialog(dialogType, data);
         break;
       case 'director':
-        this.fetchDirectorDetails(data);
+        this.openDialog(dialogType, data);
         break;
       case 'description':
         this.openDialog(dialogType, data);
@@ -55,28 +53,6 @@ export class MovieCardComponent implements OnInit {
       default:
         break;
     }
-  }
-
-  fetchGenreDetails(genreName: string): void {
-    this.fetchMovies.getOneGenre(genreName).subscribe(
-      (genreDetails: any) => {
-        this.openDialog('genre', { genre: genreDetails });
-      },
-      (error) => {
-        console.error('Error fetching genre details:', error);
-      }
-    );
-  }
-
-  fetchDirectorDetails(directorName: string): void {
-    this.fetchMovies.gettOneDirector(directorName).subscribe(
-      (directorDetails: any) => {
-        this.openDialog('director', { director: directorDetails });
-      },
-      (error) => {
-        console.error('Error fetching director details:', error);
-      }
-    );
   }
 
   openDialog(dialogType: string, data: any): void {
