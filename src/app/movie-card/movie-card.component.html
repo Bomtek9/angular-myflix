@@ -2,9 +2,27 @@
   <mat-card *ngFor="let movie of movies" style="width: 300px">
     <img [src]="movie.ImagePath" alt="{{ movie.Title }}" style="width: 100%" />
     <mat-card-actions>
-      <button mat-button color="primary">Genre</button>
-      <button mat-button color="primary">Director</button>
-      <button mat-button color="primary">Description</button>
+      <button
+        mat-button
+        color="primary"
+        (click)="openDialog('genre', movie.Genre)"
+      >
+        Genre
+      </button>
+      <button
+        mat-button
+        color="primary"
+        (click)="openDialog('director', movie.Director)"
+      >
+        Director
+      </button>
+      <button
+        mat-button
+        color="primary"
+        (click)="openDialog('description', movie.Description)"
+      >
+        Description
+      </button>
       <span style="flex-grow: 1"></span>
       <button mat-icon-button color="warn">
         <mat-icon>favorite_border</mat-icon>

@@ -1,0 +1,16 @@
+<!-- src/app/dialogs/movie-dialog/movie-dialog.component.html -->
+<div *ngIf="data.dialogType === 'genre'">
+  <h2>{{ data.data.Genre.Name }}</h2>
+  <p>{{ data.data.Genre.Description }}</p>
+  <!-- Add more details as needed -->
+</div>
+
+<div *ngIf="data.dialogType === 'director'">
+  <p>Director: {{ data.data.Director.Name }}</p>
+</div>
+
+<div *ngIf="data.dialogType === 'description'">
+  <h2>{{ data.data.movie.Title }}</h2>
+  <p>{{ data.data.movie.Description }}</p>
+  <!-- Add more details as needed -->
+</div>
