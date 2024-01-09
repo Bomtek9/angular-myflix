@@ -85,6 +85,22 @@ export class MovieCardComponent implements OnInit {
     );
   }
 
+  toggleFavoriteMovie(movie: any): void {
+    const index = this.movies.findIndex((m) => m._id === movie._id);
+    if (index !== -1) {
+      const isFavorite = this.fetchMovies.isFavoriteMovie(movie._id);
+
+      if (isFavorite) {
+        this.removeFavoriteMovie(movie);
+      } else {
+        this.addFavoriteMovie(movie);
+      }
+
+      // Update the isFavorite status in the local movies array
+      this.movies[index].isFavorite = !isFavorite;
+    }
+  }
+
   addFavoriteMovie(movie: any): void {
     this.fetchMovies.addFavoriteMovie(movie._id).subscribe(() => {
       console.log('Movie added to favorites:', movie.Title);
