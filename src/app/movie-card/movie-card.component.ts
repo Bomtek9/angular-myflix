@@ -4,13 +4,22 @@ import { MatDialog } from '@angular/material/dialog';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MovieDialogComponent } from '../movie-dialog/movie-dialog.component';
 
+interface Movie {
+  _id: string;
+  Title: string; // Add other properties based on your API response
+  ImagePath: string;
+
+  // ... other properties
+  isFavorite?: boolean; // Add this line
+}
+
 @Component({
   selector: 'app-movie-card',
   templateUrl: './movie-card.component.html',
   styleUrls: ['./movie-card.component.scss'],
 })
 export class MovieCardComponent implements OnInit {
-  movies: any[] = [];
+  movies: Movie[] = [];
 
   constructor(
     public fetchMovies: FetchApiDataService,
@@ -22,11 +31,12 @@ export class MovieCardComponent implements OnInit {
   }
 
   getMovies(): void {
-    this.fetchMovies.getAllMovies().subscribe((resp: any) => {
-      this.movies = resp;
-      this.movies.forEach((movie) => {
-        movie.isFavorite = this.fetchMovies.isFavoriteMovie(movie._id);
-      });
+    this.fetchMovies.getAllMovies().subscribe((resp: Movie[]) => {
+      console.log(resp); // Log the API response to see its structure
+      this.movies = resp.map((movie) => ({
+        ...movie,
+        isFavorite: this.fetchMovies.isFavoriteMovie(movie._id),
+      })) as Movie[];
       console.log(this.movies);
     });
   }
@@ -85,10 +95,10 @@ export class MovieCardComponent implements OnInit {
     );
   }
 
-  toggleFavoriteMovie(movie: any): void {
+  toggleFavoriteMovie(movie: Movie): void {
     const index = this.movies.findIndex((m) => m._id === movie._id);
     if (index !== -1) {
-      const isFavorite = this.fetchMovies.isFavoriteMovie(movie._id);
+      const isFavorite = this.movies[index].isFavorite;
 
       if (isFavorite) {
         this.removeFavoriteMovie(movie);

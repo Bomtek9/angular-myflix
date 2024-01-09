@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 70vh;
+  height: 95vh;
   margin-top: 0vh;
   background-color: #496e9f; /* Blue */
 
@@ -20,7 +20,7 @@
     margin-bottom: 20px;
 
     label {
-      color: #3d5a80; /* Dark Blue */
+      color: #f3f3f3; /* Dark Blue */
       margin-bottom: 5px;
       display: block;
     }
@@ -38,6 +38,7 @@
       color: #e0fbfc; /* Light Blue */
       font-size: 1.2em;
       padding: 10px 20px;
+
       border: none;
       cursor: pointer;
       transition: background-color 0.3s;
@@ -51,25 +52,27 @@
   .favorite-movies {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 10px;
 
     .favorite-movie-card {
+      background-color: #ffffff;
       width: 200px;
-      padding: 10px;
-      border: 1px solid #eee;
-      border-radius: 5px;
+      margin-bottom: 5px;
+
+      border-radius: 0px;
 
       img {
         width: 100%;
-        height: 150px;
-        object-fit: cover;
+        height: 90%;
+        object-fit: contain; /* Update this line */
         border-radius: 5px;
       }
 
       p {
-        margin-top: 10px;
+        margin-top: 2px;
+
         font-size: 1em;
-        color: #293241; /* Navy Blue */
+        color: #647cc3; /* Navy Blue */
       }
     }
   }
