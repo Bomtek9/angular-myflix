@@ -1,15 +1,10 @@
 <h2 mat-dialog-title>{{ data.dialogType | titlecase }}</h2>
 <div mat-dialog-content>
-  <ul>
-    <li *ngFor="let movie of data.data.movies">{{ movie.Title }}</li>
-  </ul>
-
-  <p></p>
-  <p *ngIf="data.dialogType === 'genre' && data.data.genre">
-    Genre: {{ data.data.genre.Name }}
+  <p *ngIf="data.dialogType === 'genre' && data.data.movies">
+    Genre: {{ data.data.movies[0].Genre.Name }}
   </p>
-  <p *ngIf="data.dialogType === 'director' && data.data.director">
-    Director: {{ data.data.director.Name }}
+  <p *ngIf="data.dialogType === 'director' && data.data.movies">
+    Director: {{ data.data.movies[0].Director.Name }}
   </p>
   <p *ngIf="data.dialogType === 'description'">
     Description: {{ data.data.Description }}
