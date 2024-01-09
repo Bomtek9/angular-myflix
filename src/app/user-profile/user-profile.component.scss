@@ -1,0 +1,41 @@
+/* src/app/user-profile/user-profile.component.scss */
+.profile-container {
+  padding: 20px;
+
+  h2 {
+    color: #3d5a80; /* Dark Blue */
+    margin-bottom: 10px;
+  }
+
+  .user-info {
+    p {
+      color: #293241; /* Navy Blue */
+    }
+  }
+
+  .favorite-movies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    .favorite-movie-card {
+      width: 200px;
+      padding: 10px;
+      border: 1px solid #eee;
+      border-radius: 5px;
+
+      img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 5px;
+      }
+
+      p {
+        margin-top: 10px;
+        font-size: 1em;
+        color: #293241; /* Navy Blue */
+      }
+    }
+  }
+}
