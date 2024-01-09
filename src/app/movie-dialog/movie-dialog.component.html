@@ -1,16 +1,16 @@
-<!-- src/app/dialogs/movie-dialog/movie-dialog.component.html -->
-<div *ngIf="data.dialogType === 'genre'">
-  <h2>{{ data.data.Genre.Name }}</h2>
-  <p>{{ data.data.Genre.Description }}</p>
-  <!-- Add more details as needed -->
+<!-- movie-dialog.component.html -->
+<h2 mat-dialog-title>{{ data.dialogType | titlecase }}</h2>
+<div mat-dialog-content>
+  <p *ngIf="data.dialogType === 'genre' && data.data.genre">
+    Genre: {{ data.data.genre.Name }}
+  </p>
+  <p *ngIf="data.dialogType === 'director' && data.data.director">
+    Director: {{ data.data.director.Name }}
+  </p>
+  <p *ngIf="data.dialogType === 'description'">
+    Description: {{ data.data.Description }}
+  </p>
 </div>
-
-<div *ngIf="data.dialogType === 'director'">
-  <p>Director: {{ data.data.Director.Name }}</p>
-</div>
-
-<div *ngIf="data.dialogType === 'description'">
-  <h2>{{ data.data.movie.Title }}</h2>
-  <p>{{ data.data.movie.Description }}</p>
-  <!-- Add more details as needed -->
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Close</button>
 </div>

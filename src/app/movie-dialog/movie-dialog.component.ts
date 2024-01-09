@@ -1,6 +1,6 @@
-// src/app/dialogs/movie-dialog/movie-dialog.component.ts
+// movie-dialog.component.ts
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-movie-dialog',
@@ -12,4 +12,8 @@ export class MovieDialogComponent {
     public dialogRef: MatDialogRef<MovieDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 }

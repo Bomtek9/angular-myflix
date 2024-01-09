@@ -5,22 +5,14 @@
       <button
         mat-button
         color="primary"
-        (click)="openDialog('genre', movie.Genre)"
+        (click)="openGenreDialog(movie.Genre.Name)"
       >
         Genre
       </button>
-      <button
-        mat-button
-        color="primary"
-        (click)="openDialog('director', movie.Director)"
-      >
+      <button mat-button color="primary" (click)="openDirectorDialog(movie)">
         Director
       </button>
-      <button
-        mat-button
-        color="primary"
-        (click)="openDialog('description', movie.Description)"
-      >
+      <button mat-button color="primary" (click)="openDescriptionDialog(movie)">
         Description
       </button>
       <span style="flex-grow: 1"></span>
