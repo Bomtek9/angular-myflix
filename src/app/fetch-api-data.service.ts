@@ -151,14 +151,16 @@ export class FetchApiDataService {
     const token = localStorage.getItem('token');
     const user = JSON.parse(localStorage.getItem('user') || '{}');
 
+    // Remove the movieId from the FavoriteMovies array locally
     const index = user.FavoriteMovies.indexOf(movieId);
-    if (index > -1) {
+    if (index >= 0) {
       user.FavoriteMovies.splice(index, 1);
     }
     localStorage.setItem('user', JSON.stringify(user));
 
+    // Delete the favorite movie from the server
     return this.http
-      .delete(apiUrl + `users/${user.Username}/${movieId}`, {
+      .delete(apiUrl + `users/${user.Username}/favorites/${movieId}`, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         }),
