@@ -10,7 +10,6 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 // This import is used to display notifications back to the user
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-
 @Component({
   selector: 'app-user-login-form',
   templateUrl: './user-login-form.component.html',

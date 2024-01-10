@@ -34,7 +34,7 @@ export class UserProfileComponent implements OnInit {
         this.User = data;
         this.Username = data.Username;
         this.Email = data.Email;
-        this.Birthday = this.formatBirthday(data.Birthday); // Format the birthday
+        this.Birthday = data.Birthday;
 
         console.log('User:', this.User);
         console.log('Username:', this.Username);

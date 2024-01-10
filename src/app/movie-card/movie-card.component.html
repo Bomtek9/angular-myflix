@@ -12,6 +12,12 @@
       <button mat-button color="primary" (click)="openDescriptionDialog(movie)">
         Description
       </button>
+      <span style="flex-grow: 1"></span>
+      <button mat-icon-button color="warn" (click)="toggleFavoriteMovie(movie)">
+        <mat-icon [color]="movie.isFavorite ? 'warn' : 'default'">
+          {{ movie.isFavorite ? "favorite" : "favorite_border" }}
+        </mat-icon>
+      </button>
     </mat-card-actions>
   </mat-card>
 </div>
