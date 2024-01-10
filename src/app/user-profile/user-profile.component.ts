@@ -27,20 +27,38 @@ export class UserProfileComponent implements OnInit {
   }
 
   getUserProfile(): void {
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
-    if (user) {
-      this.Username = user; // Set the Username property
-      this.fetchApiData.getOneUser(user).subscribe((data: any) => {
-        this.User = data;
-        this.Username = data.Username;
-        this.Email = data.Email;
-        this.Birthday = data.Birthday;
+    const storedData = localStorage.getItem('user') || '{}';
+    console.log('Stored Data:', storedData);
 
-        console.log('User:', this.User);
-        console.log('Username:', this.Username);
+    try {
+      const user = JSON.parse(storedData);
+      console.log('Parsed User:', user);
 
-        this.getFavoriteMovies();
-      });
+      if (user && user.Username) {
+        this.fetchApiData.getOneUser(user.Username).subscribe(
+          (data: any) => {
+            console.log('API Data:', data);
+            this.User = data as any;
+            this.Username = this.User.Username;
+            this.Email = this.User.Email;
+            this.Birthday = this.formatBirthday(this.User.Birthday);
+
+            console.log('User:', this.User);
+            console.log('Username:', this.Username);
+
+            this.getFavoriteMovies();
+          },
+          (error) => {
+            console.error('Error fetching user data:', error);
+          }
+        );
+      } else {
+        console.error('Invalid user data.');
+      }
+    } catch (parseError) {
+      console.error('Error parsing stored data:', parseError);
+      // Clear the invalid data from localStorage
+      localStorage.removeItem('user');
     }
   }
 

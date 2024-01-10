@@ -1,4 +1,3 @@
-// src/app/user-registration-form/user-registration-form.component.ts
 import { Component, OnInit, Input } from '@angular/core';
 
 // You'll use this import to close the dialog on success
@@ -35,8 +34,8 @@ export class UserLoginFormComponent implements OnInit {
         (result) => {
           console.log(result);
 
-          // Store only the username in localStorage
-          localStorage.setItem('user', result.user.Username);
+          // Store the entire user object in localStorage
+          localStorage.setItem('user', JSON.stringify(result.user));
 
           this.dialogRef.close();
           this.snackBar.open('Logged in', 'OK', { duration: 2000 });
