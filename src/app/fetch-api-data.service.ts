@@ -147,9 +147,14 @@ export class FetchApiDataService {
     const token = localStorage.getItem('token');
     const user = JSON.parse(localStorage.getItem('user') || '{}');
 
-    // Update the URL to include "favorites" before the movieId
+    const index = user.FavoriteMovies.indexOf(movieId);
+    if (index >= 0) {
+      user.FavoriteMovies.splice(index, 1);
+    }
+    localStorage.setItem('user', JSON.stringify(user));
+
     return this.http
-      .delete(apiUrl + `users/${user.Username}/favorites/${movieId}`, {
+      .delete(apiUrl + `users/${user.Username}/${movieId}`, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         }),
