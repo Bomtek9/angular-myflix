@@ -1,6 +1,8 @@
 // src/app/movie-card.component.ts
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MovieDialogComponent } from '../movie-dialog/movie-dialog.component';
 
@@ -14,7 +16,9 @@ export class MovieCardComponent implements OnInit {
 
   constructor(
     public fetchMovies: FetchApiDataService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public router: Router,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -90,11 +94,12 @@ export class MovieCardComponent implements OnInit {
 
     const index = this.movies.findIndex((m) => m._id === movie._id);
     console.log('Index:', index);
+
     if (index !== -1) {
       const isFavorite = this.fetchMovies.isFavoriteMovie(movie._id);
 
       if (isFavorite) {
-        this.removeFavoriteMovie(movie);
+        this.deleteFavoriteMovie(movie);
       } else {
         this.addFavoriteMovie(movie);
       }
@@ -110,7 +115,7 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  removeFavoriteMovie(movie: any): void {
+  deleteFavoriteMovie(movie: any): void {
     this.fetchMovies.deleteFavoriteMovie(movie._id).subscribe(() => {
       console.log('Movie removed from favorites:', movie.Title);
     });
