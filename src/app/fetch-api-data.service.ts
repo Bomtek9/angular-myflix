@@ -128,12 +128,10 @@ export class FetchApiDataService {
     const token = localStorage.getItem('token');
     const user = JSON.parse(localStorage.getItem('user') || '{}');
 
-    user.FavoriteMovies.push(movieId);
-    localStorage.setItem('user', JSON.stringify(user));
-
+    // Update the URL to include "favorites" before the movieId
     return this.http
       .put(
-        apiUrl + `users/${user.Username}/${movieId}`,
+        apiUrl + `users/${user.Username}/favorites/${movieId}`,
         {},
         {
           headers: new HttpHeaders({
@@ -149,14 +147,9 @@ export class FetchApiDataService {
     const token = localStorage.getItem('token');
     const user = JSON.parse(localStorage.getItem('user') || '{}');
 
-    const index = user.FavoriteMovies.indexOf(movieId);
-    if (index >= 0) {
-      user.FavoriteMovies.splice(index, 1);
-    }
-    localStorage.setItem('user', JSON.stringify(user));
-
+    // Update the URL to include "favorites" before the movieId
     return this.http
-      .delete(apiUrl + `users/${user.Username}/${movieId}`, {
+      .delete(apiUrl + `users/${user.Username}/favorites/${movieId}`, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         }),
