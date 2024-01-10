@@ -128,11 +128,15 @@ export class FetchApiDataService {
     const token = localStorage.getItem('token');
     const user = JSON.parse(localStorage.getItem('user') || '{}');
 
+    console.log(
+      'Making request to:',
+      apiUrl + `users/${user.Username}/favorites/${movieId}`
+    );
     // Update the URL to include "favorites" before the movieId
     return this.http
       .put(
         apiUrl + `users/${user.Username}/favorites/${movieId}`,
-        {},
+
         {
           headers: new HttpHeaders({
             'Content-Type': 'application/json',
