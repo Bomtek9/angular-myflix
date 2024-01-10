@@ -29,12 +29,13 @@ export class FetchApiDataService {
 
   public userLogin(userDetails: any): Observable<any> {
     return this.http
-      .post(apiUrl + 'login?' + new URLSearchParams(userDetails), {})
+      .post(apiUrl + 'login', userDetails)
       .pipe(catchError(this.handleError));
   }
 
   getAllMovies(): Observable<any> {
     const token = localStorage.getItem('token');
+
     return this.http
       .get(apiUrl + 'movies', {
         headers: new HttpHeaders({
@@ -43,7 +44,6 @@ export class FetchApiDataService {
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
-
   getOneMovie(title: string): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http

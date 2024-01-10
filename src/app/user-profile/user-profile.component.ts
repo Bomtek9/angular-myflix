@@ -28,23 +28,17 @@ export class UserProfileComponent implements OnInit {
 
   getUserProfile(): void {
     const storedData = localStorage.getItem('user') || '{}';
-    console.log('Stored Data:', storedData);
 
     try {
       const user = JSON.parse(storedData);
-      console.log('Parsed User:', user);
 
       if (user && user.Username) {
         this.fetchApiData.getOneUser(user.Username).subscribe(
           (data: any) => {
-            console.log('API Data:', data);
             this.User = data as any;
             this.Username = this.User.Username;
             this.Email = this.User.Email;
             this.Birthday = this.formatBirthday(this.User.Birthday);
-
-            console.log('User:', this.User);
-            console.log('Username:', this.Username);
 
             this.getFavoriteMovies();
           },

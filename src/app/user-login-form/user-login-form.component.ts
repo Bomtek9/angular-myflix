@@ -27,15 +27,19 @@ export class UserLoginFormComponent implements OnInit {
   ngOnInit(): void {}
 
   loginUser(): void {
-    const userLoginObservable = this.fetchApiData.userLogin(this.userData);
-
-    if (userLoginObservable) {
-      userLoginObservable.subscribe(
+    this.fetchApiData
+      .userLogin({
+        Username: this.userData.Username,
+        Password: this.userData.Password,
+      })
+      .subscribe(
         (result) => {
           console.log(result);
 
           // Store the entire user object in localStorage
           localStorage.setItem('user', JSON.stringify(result.user));
+          // Update: Retrieve and store the token consistently
+          localStorage.setItem('token', result.token);
 
           this.dialogRef.close();
           this.snackBar.open('Logged in', 'OK', { duration: 2000 });
@@ -46,6 +50,5 @@ export class UserLoginFormComponent implements OnInit {
           this.snackBar.open('Login failed', 'OK', { duration: 2000 });
         }
       );
-    }
   }
 }
