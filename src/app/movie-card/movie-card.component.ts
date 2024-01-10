@@ -86,7 +86,10 @@ export class MovieCardComponent implements OnInit {
   }
 
   toggleFavoriteMovie(movie: any): void {
+    console.log('Toggle favorite movie function called');
+
     const index = this.movies.findIndex((m) => m._id === movie._id);
+    console.log('Index:', index);
     if (index !== -1) {
       const isFavorite = this.fetchMovies.isFavoriteMovie(movie._id);
 
