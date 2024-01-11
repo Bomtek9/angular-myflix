@@ -57,13 +57,10 @@
     .favorite-movie-card {
       background-color: #ffffff;
       width: 200px;
-      margin-bottom: 5px;
-
-      border-radius: 0px;
 
       img {
         width: 100%;
-        height: 90%;
+        height: 100%;
         object-fit: contain; /* Update this line */
         border-radius: 5px;
       }

@@ -25,9 +25,8 @@
   <div class="favorite-movies">
     <div *ngFor="let movie of FavoriteMovies" class="favorite-movie-card">
       <img [src]="movie.ImagePath" alt="{{ movie.Title }}" />
-      <p>{{ movie.Title }}</p>
     </div>
   </div>
-
+  <br />
   <button (click)="deleteAccount()">Delete Account</button>
 </div>
