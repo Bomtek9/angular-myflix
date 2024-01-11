@@ -63,7 +63,7 @@ export class UserProfileComponent implements OnInit {
         .getFavoriteMovies(this.Username)
         .subscribe((data: any) => {
           this.FavoriteMovies = data;
-          console.log('Favorite Movies:', this.FavoriteMovies);
+          // console.log('Favorite Movies:', this.FavoriteMovies);
         });
     } else {
       console.error('Username is undefined.');

@@ -128,10 +128,9 @@ export class FetchApiDataService {
   public addFavoriteMovie(movieId: string): Observable<any> {
     const token = localStorage.getItem('token');
     const user = JSON.parse(localStorage.getItem('user') || '{}');
-    console.log('Before:', user.FavoriteMovies);
 
     user.FavoriteMovies.push(movieId); // Update the FavoriteMovies array
-    console.log('After:', user.FavoriteMovies);
+
     localStorage.setItem('user', JSON.stringify(user)); // Update the user object in localStorage
 
     return this.http
@@ -185,7 +184,6 @@ export class FetchApiDataService {
 
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
-      console.error('Some error occurred:', error.error.message);
     } else {
       console.error(
         `Error Status code ${error.status}, ` + `Error body is: ${error.error}`

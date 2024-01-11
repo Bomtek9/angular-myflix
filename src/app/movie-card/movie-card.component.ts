@@ -111,13 +111,13 @@ export class MovieCardComponent implements OnInit {
 
   addFavoriteMovie(movie: any): void {
     this.fetchMovies.addFavoriteMovie(movie._id).subscribe(() => {
-      console.log('Movie added to favorites:', movie.Title);
+      // console.log('Movie added to favorites:', movie.Title);
     });
   }
 
   deleteFavoriteMovie(movie: any): void {
     this.fetchMovies.deleteFavoriteMovie(movie._id).subscribe(() => {
-      console.log('Movie removed from favorites:', movie.Title);
+      // console.log('Movie removed from favorites:', movie.Title);
     });
   }
 

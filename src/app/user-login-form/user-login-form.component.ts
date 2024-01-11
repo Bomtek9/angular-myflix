@@ -34,7 +34,7 @@ export class UserLoginFormComponent implements OnInit {
       })
       .subscribe(
         (result) => {
-          console.log(result);
+          // console.log(result);
 
           // Store the entire user object in localStorage
           localStorage.setItem('user', JSON.stringify(result.user));
