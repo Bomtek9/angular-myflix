@@ -17,6 +17,15 @@ import { Router } from '@angular/router';
 export class UserLoginFormComponent implements OnInit {
   @Input() userData = { Username: '', Password: '' };
 
+  /**
+   * Constructs an instance of the UserLoginFormComponent.
+   * @constructor
+   * @param {FetchApiDataService} fetchApiData - The service for API communication.
+   * @param {MatDialogRef<UserLoginFormComponent>} dialogRef - Reference to the dialog instance.
+   * @param {MatSnackBar} snackBar - Service for displaying snack bar notifications.
+   * @param {Router} router - Angular router service for navigation.
+   */
+
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
@@ -36,9 +45,8 @@ export class UserLoginFormComponent implements OnInit {
         (result) => {
           // console.log(result);
 
-          // Store the entire user object in localStorage
           localStorage.setItem('user', JSON.stringify(result.user));
-          // Update: Retrieve and store the token consistently
+          /**Update: Retrieve and store the token consistently*/
           localStorage.setItem('token', result.token);
 
           this.dialogRef.close();

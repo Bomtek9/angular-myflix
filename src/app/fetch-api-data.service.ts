@@ -10,15 +10,27 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-//Declaring the api url that will provide data for the client app
+/**
+ * Declaring the API URL that provides data for the client app.
+ * @constant
+ * @type {string}
+ */
 const apiUrl = 'https://dup-movies-18ba622158fa.herokuapp.com/';
 
+/**
+ * Injectable service to handle API requests and responses.
+ * @class
+ * @memberof module:FetchApiDataService
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class FetchApiDataService {
-  // Inject the HttpClient module to the constructor params
-  // This will provide HttpClient to the entire class, making it available via this.http
+  /**
+   * Constructs the `FetchApiDataService` with the `HttpClient` module.
+   * @constructor
+   * @param {HttpClient} http - The Angular HttpClient module.
+   */
   constructor(private http: HttpClient) {}
 
   public userRegistration(userDetails: any): Observable<any> {

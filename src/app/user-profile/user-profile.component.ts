@@ -16,6 +16,13 @@ export class UserProfileComponent implements OnInit {
   Email = '';
   Birthday = '';
 
+  /**
+   * Constructor to inject services.
+   * @constructor
+   * @param {FetchApiDataService} fetchApiData - The FetchApiDataService for API communication.
+   * @param {DatePipe} datePipe - The DatePipe for date formatting.
+   */
+
   constructor(
     private fetchApiData: FetchApiDataService,
     private datePipe: DatePipe
@@ -23,8 +30,12 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserProfile();
-    // No need to call getFavoriteMovies here, as it's called within getUserProfile
   }
+
+  /**
+   * User object to store user details.
+   * @type {any}
+   */
 
   getUserProfile(): void {
     const storedData = localStorage.getItem('user') || '{}';
@@ -57,7 +68,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   getFavoriteMovies(): void {
-    // Ensure that this.Username is defined before calling the service
     if (this.Username) {
       this.fetchApiData
         .getFavoriteMovies(this.Username)
@@ -70,11 +80,16 @@ export class UserProfileComponent implements OnInit {
     }
   }
   handleUpdate(): void {
-    // Format the birthday using DatePipe
+    /**
+     * Formats the birthday using DatePipe.
+     * @private
+     * @method
+     * @param {string} birthday - The birthday string.
+     * @returns {string} - The formatted birthday string.
+     */
+
     const formattedBirthday = this.formatBirthday(this.Birthday);
 
-    // Implement your update logic here
-    // You can use this.Username, this.Password, this.Email, formattedBirthday
     this.fetchApiData
       .editUser({
         Username: this.Username,
