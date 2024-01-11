@@ -1,5 +1,5 @@
 <!-- src/app/movie-card.component.html -->
-<div style="display: flex; gap: 16px">
+<div class="card-container">
   <mat-card *ngFor="let movie of movies" style="width: 300px">
     <img [src]="movie.ImagePath" alt="{{ movie.Title }}" style="width: 100%" />
     <mat-card-actions>

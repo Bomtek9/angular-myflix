@@ -1,5 +1,8 @@
 .card-container {
   display: flex;
+  gap: 16px;
+  flex-wrap: wrap; /* This ensures that items will wrap to the next line */
+  margin-top: 1%;
 }
 
 /* Add this style for fixed width */
