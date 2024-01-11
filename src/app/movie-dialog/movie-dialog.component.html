@@ -2,13 +2,13 @@
 <div class="mat-dialog">
   <div mat-dialog-content>
     <p *ngIf="data.dialogType === 'genre' && data.data.movies">
-      Genre: {{ data.data.movies[0].Genre.Name }}
+      {{ data.data.movies[0].Genre.Name }}
     </p>
     <p *ngIf="data.dialogType === 'director' && data.data.movies">
-      Director: {{ data.data.movies[0].Director.Name }}
+      {{ data.data.movies[0].Director.Name }}
     </p>
     <p *ngIf="data.dialogType === 'description'">
-      Description: {{ data.data.Description }}
+      {{ data.data.Description }}
     </p>
   </div>
 
